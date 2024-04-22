@@ -1,3 +1,5 @@
+package bank.management.system;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -9,11 +11,9 @@ public class Login extends JFrame implements ActionListener {
     Login(){
         setTitle("AUTOMATED TELLER MACHINE");
 
-        setSize(800,480);
-        setVisible(true);
-        setLocation(350,200);
         setLayout(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(800,480);
+
 
         //To apply ATM logo on Frame
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("Icons/logo.jpg")); //Use Image icon
@@ -71,6 +71,9 @@ public class Login extends JFrame implements ActionListener {
 
         //To set Frame Background color
         getContentPane().setBackground(Color.WHITE);
+        setLocation(350,200);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
 
     }
 
@@ -84,7 +87,8 @@ public class Login extends JFrame implements ActionListener {
 
         }
         else if(ae.getSource() == signUpButton){
-
+            setVisible(false);
+            new SignUpOne().setVisible(true);
         }
         else {
 
