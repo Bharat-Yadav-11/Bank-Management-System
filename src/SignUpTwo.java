@@ -14,7 +14,7 @@ public class SignUpTwo extends JFrame implements ActionListener {
     JTextField panTextField, aadharTextField;
     JButton next;
     JRadioButton syes, sno, exyes, exno;
-    SignUpTwo(String formNo){
+    SignUpTwo(){
         //To set Background color
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
@@ -157,16 +157,16 @@ public class SignUpTwo extends JFrame implements ActionListener {
         next.addActionListener(this);
         add(next);
 
-        setVisible(true);
         setSize(850, 800);
         setLocation(350,10);
-        setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
+        setVisible(true);
 
 
     }
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new SignUpTwo(""));
+        SwingUtilities.invokeLater(() -> new SignUpTwo());
 
 
     }
@@ -206,6 +206,8 @@ public class SignUpTwo extends JFrame implements ActionListener {
                 c.s.executeUpdate(query);
 
                 //SignUp3 Object
+                setVisible(false);
+                new SignUpThree().setVisible(true);
 
             }
         } catch (Exception ex) {
