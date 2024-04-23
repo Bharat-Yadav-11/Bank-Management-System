@@ -3,6 +3,7 @@ package bank.management.system;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 
 public class Login extends JFrame implements ActionListener {
     JButton loginButton, signUpButton, clearButton;
@@ -37,6 +38,7 @@ public class Login extends JFrame implements ActionListener {
         //To create single line input field use JTextField :-
         //JTextField is a lightweight component that allows the editing of a single line of text.
         cardTextField = new JTextField();
+        cardTextField.setFont(new Font("Arial", Font.BOLD, 12));
         cardTextField.setBounds(300, 150, 250, 30);
         add(cardTextField);
 
@@ -49,6 +51,7 @@ public class Login extends JFrame implements ActionListener {
         //To create single line input field use JTextField :-
         //JTextField is a lightweight component that allows the editing of a single line of text.
         pinTextField = new JPasswordField();
+        pinTextField.setFont(new Font("Arial", Font.BOLD, 12));
         pinTextField.setBounds(300, 220, 250, 30);
         add(pinTextField);
 
@@ -84,6 +87,23 @@ public class Login extends JFrame implements ActionListener {
             pinTextField.setText("");
         }
         else if(ae.getSource() == loginButton){
+            Conn conn = new Conn();
+            String cardNumber = cardTextField.getText();
+            String pinNumber = pinTextField.getText();
+            String query = "select * from login where cardNumber = '"+cardNumber+"' and pinNumber = '"+pinNumber+"' ";
+
+            try {
+                ResultSet rs = conn.s.executeQuery(query);
+                if (rs.next()){
+                    setVisible(false);
+                    new Transactions(pinNumber).setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Incorrect Card Number and Pin");
+                }
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
 
         }
         else if(ae.getSource() == signUpButton){
